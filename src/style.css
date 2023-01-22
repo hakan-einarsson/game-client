@@ -1,0 +1,66 @@
+body {
+  margin-top: 0;
+  padding: 0;
+  background-color: #000;
+}
+
+#wrapper {
+  position:relative;
+  max-width: 100%;
+
+}
+#wrapper canvas {
+  position: relative;
+  top: 0;
+  left: 50px;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  width: 100%;
+  max-width: 1024px;
+}
+
+#background {
+  background-color: darkolivegreen;
+  z-index: -1;
+}
+
+canvas {
+  /* background-color: rgb(153, 153, 153); */
+} 
+/* #fps-counter{
+  position: absolute;
+  top: 0;
+  /* transform: translateY(-50%); */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  /*color: rgb(255, 255, 255);
+  font-size: 2em;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  z-index: 99;
+} */
+
+#fps-counter{
+  margin:0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width:100%;
+  color: rgb(255, 255, 255);
+  font-size: 2em;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  z-index: 99;
+}
+
+img {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
