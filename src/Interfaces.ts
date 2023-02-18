@@ -1,5 +1,11 @@
 import Spritesheet from "./Spritesheet";
 
+export interface CanvasContext{
+    drawImage: (renderProperties: RenderProperties) => void;
+    clearViewport: () => void;
+    initialize: () => void;
+    bindTexture: (image: HTMLImageElement) => void;
+}
 export interface Animation {
     name: string;
     startFrame: number;

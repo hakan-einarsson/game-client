@@ -2,6 +2,8 @@ import FPSCounter from "./FPSCounter";
 import { GameConfig } from "./GameConfig";
 import Renderer from "./Renderer";
 import DynamicGameObject from "./DynamicGameObject";
+import { CanvasContext } from "./interfaces";
+import WebGlContext from "./WebGlContext";
 
 
 
@@ -9,7 +11,7 @@ export default class Game {
     config: GameConfig;
     canvases: HTMLCollectionOf<HTMLCanvasElement>;
     canvas: HTMLCanvasElement;
-    context: CanvasRenderingContext2D | null;
+    context: CanvasContext | null;
     counter: FPSCounter | null;
     renderer: Renderer;
     dynamicGameObjects: DynamicGameObject[];
@@ -20,7 +22,7 @@ export default class Game {
         this.counter = config.fpsCounter ? new FPSCounter(document.getElementById('fps-counter')) : null;
         this.canvases = document.getElementsByTagName("canvas");
         this.canvas = document.getElementById("game") as HTMLCanvasElement;
-        this.context = this.canvas ? this.canvas.getContext("2d") : null;
+        this.context = this.canvas? this.setUpContext() : null;
         // if(this.context)this.context.imageSmoothingEnabled = false;
         this.renderer = new Renderer(this.canvas, this.context);
         this.dynamicGameObjects = [];
@@ -29,6 +31,14 @@ export default class Game {
         this.setCanvasSize();
         this.positionCanvas();
         this.canvasResizeListener();
+        this.context?.initialize();
+    }
+
+    setUpContext(): CanvasContext | null {
+        if(this.config.context === "webgl"){
+            return new WebGlContext(this.canvas);
+        }
+        return null;
     }
 
     setCanvasSize() {
@@ -120,7 +130,7 @@ export default class Game {
 
     render(deltaTime:number) {
         if(this.context){
-            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            // this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
             // if (this.config.fpsCounter && this.counter) {
             //     this.counter.update();
             // }
